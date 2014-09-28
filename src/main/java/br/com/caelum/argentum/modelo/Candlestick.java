@@ -53,4 +53,12 @@ public final class Candlestick {
 		return data;
 	}
 
+	@Override
+	public String toString() {
+		return "Candlestick [abertura=" + abertura + ", fechamento="
+				+ fechamento + ", minimo=" + minimo + ", maximo=" + maximo
+				+ ", volume=" + volume + ", data=" + data + "]";
+	}
+
+	
 }
