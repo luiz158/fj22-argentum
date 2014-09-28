@@ -57,7 +57,7 @@ public final class Candlestick {
 	public String toString() {
 		return "Candlestick [abertura=" + abertura + ", fechamento="
 				+ fechamento + ", minimo=" + minimo + ", maximo=" + maximo
-				+ ", volume=" + volume + ", data=" + data + "]";
+				+ ", volume=" + volume + ", data=" + data.getTime() + "]";
 	}
 
 	
