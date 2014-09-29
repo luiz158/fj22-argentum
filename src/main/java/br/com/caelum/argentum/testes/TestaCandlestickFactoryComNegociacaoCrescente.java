@@ -15,7 +15,7 @@ public class TestaCandlestickFactoryComNegociacaoCrescente {
 		
 		List<Negociacao> negociacoes = new ArrayList<>();
 
-		Candlestick candlestick = new CandlestickFactory().controisCandleParaData(dataDeHoje, negociacoes);
+		Candlestick candlestick = new CandlestickFactory().constroiCandleParaData(dataDeHoje, negociacoes);
 		
 		System.out.println(candlestick.getMinimo());
 		System.out.println(candlestick.getMaximo());

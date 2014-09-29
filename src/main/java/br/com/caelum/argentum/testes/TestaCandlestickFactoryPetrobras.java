@@ -16,7 +16,7 @@ public class TestaCandlestickFactoryPetrobras {
 		List<Negociacao> negociacoes = new ArrayList<>();
 		negociacoes.add(new Negociacao(30, 0, dataDeHoje));
 		
-		Candlestick candlestick = new CandlestickFactory().controisCandleParaData(dataDeHoje, negociacoes);
+		Candlestick candlestick = new CandlestickFactory().constroiCandleParaData(dataDeHoje, negociacoes);
 
 		System.out.println(candlestick);
 	}

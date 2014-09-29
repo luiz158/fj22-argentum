@@ -17,7 +17,7 @@ public class TestaCandlestickFactoryComAberturaIgualFechamento {
 		negociacoes.add(new Negociacao(100, 2, dataDeHoje));
 		negociacoes.add(new Negociacao(100, 3, dataDeHoje));
 		
-		Candlestick candlestick = new CandlestickFactory().controisCandleParaData(dataDeHoje, negociacoes);
+		Candlestick candlestick = new CandlestickFactory().constroiCandleParaData(dataDeHoje, negociacoes);
 		
 		System.out.println(candlestick);
 	}
