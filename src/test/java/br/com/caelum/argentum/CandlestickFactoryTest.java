@@ -3,6 +3,7 @@ package br.com.caelum.argentum;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.junit.Assert;
@@ -67,5 +68,19 @@ public class CandlestickFactoryTest {
 		Assert.assertEquals(100.0, candlestick.getMinimo(), 0);
 		Assert.assertEquals(100.0, candlestick.getMaximo(), 0);
 		Assert.assertEquals(200.0, candlestick.getVolume(), 0);
+	}
+	
+	@Test
+	public void paraNegociacoesDeTresDiasDistintosGeraTresCandles() throws Exception {
+		Calendar ontem = new GregorianCalendar(2014, 10, 7);
+		Calendar hoje = new GregorianCalendar(2014, 10, 8);
+		Calendar amanha = new GregorianCalendar(2014, 10, 9);
+		
+		List<Negociacao> negociacoes = Arrays.asList(new Negociacao(100, 1, ontem), new Negociacao(120, 2, hoje), new Negociacao(150, 2, amanha));
+		
+		CandlestickFactory factory = new CandlestickFactory();
+		List<Candlestick> candles = factory.constroidCandles(negociacoes);
+		
+		Assert.assertEquals(3, candles.size());
 	}
 }
