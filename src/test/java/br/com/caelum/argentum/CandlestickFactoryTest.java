@@ -82,5 +82,30 @@ public class CandlestickFactoryTest {
 		List<Candlestick> candles = factory.constroidCandles(negociacoes);
 		
 		Assert.assertEquals(3, candles.size());
+		Assert.assertEquals(100, candles.get(0).getAbertura(), 0);
+		Assert.assertEquals(120, candles.get(1).getAbertura(), 0);
+		Assert.assertEquals(150, candles.get(2).getAbertura(), 0);
 	}
+	
+	@Test
+	public void paraQuatroNegociacoesDeDoisDiasDistintosGeraDoisCandles() throws Exception {
+		Calendar ontem = new GregorianCalendar(2014, 9, 7); 
+		Calendar hoje = new GregorianCalendar(2014, 9, 8);
+		
+		List<Negociacao> negociacoes = new ArrayList<>();
+		negociacoes.add(new Negociacao(100, 1, ontem));
+		negociacoes.add(new Negociacao(200, 1, ontem));
+		negociacoes.add(new Negociacao(300, 1, hoje));
+		negociacoes.add(new Negociacao(400, 1, hoje));
+		
+		CandlestickFactory factory = new CandlestickFactory();
+		List<Candlestick> candles = factory.constroidCandles(negociacoes);
+		
+		Assert.assertEquals(2, candles.size());
+		Assert.assertEquals(100, candles.get(0).getAbertura(), 0);
+		Assert.assertEquals(200, candles.get(0).getFechamento(), 0);
+		Assert.assertEquals(300, candles.get(1).getAbertura(), 0);
+		Assert.assertEquals(400, candles.get(1).getFechamento(), 0);
+	}
+	
 }

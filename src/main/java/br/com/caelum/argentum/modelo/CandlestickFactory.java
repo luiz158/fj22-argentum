@@ -1,7 +1,6 @@
 package br.com.caelum.argentum.modelo;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -29,10 +28,18 @@ public class CandlestickFactory {
 
 	public List<Candlestick> constroidCandles(List<Negociacao> negociacoes) {
 		List<Candlestick> candles = new ArrayList<>();
-		
+
+		Calendar data = negociacoes.get(0).getData();
+		List<Negociacao> negociacoesMesmoDia = new ArrayList<>();
 		for (Negociacao negociacao: negociacoes) {
-			candles.add(this.constroiCandleParaData(negociacao.getData(), Arrays.asList(negociacao)));
+			if (!negociacao.isMesmoDia(data)) {
+				candles.add(this.constroiCandleParaData(data, negociacoesMesmoDia));
+				data = negociacao.getData();
+				negociacoesMesmoDia = new ArrayList<>();
+			}
+			negociacoesMesmoDia.add(negociacao);
 		}
+		candles.add(this.constroiCandleParaData(data, negociacoesMesmoDia));
 		return candles;
 	}
 }
