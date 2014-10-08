@@ -57,4 +57,14 @@ public class NegociacaoTest {
 		
 		Assert.assertFalse(negociacao.isMesmoDia(segundaData));
 	}
+	
+	@Test
+	public void mesmoDiaEMesMasAnosDiferentesNaoSaoDoMesmoDia() throws Exception {
+		Calendar primeiraData = new GregorianCalendar(2014, 9, 30);
+		Calendar segundaData = new GregorianCalendar(2013, 9, 30);
+		
+		Negociacao negociacao = new Negociacao(100, 10, primeiraData);
+		
+		Assert.assertFalse(negociacao.isMesmoDia(segundaData));
+	}
 }
