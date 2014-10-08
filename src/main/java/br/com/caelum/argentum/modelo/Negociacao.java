@@ -38,4 +38,9 @@ public class Negociacao {
 		return (Calendar) this.data.clone();
 	}
 
+	public boolean isMesmoDia(Calendar dataComparada) {
+		return (this.data.get(Calendar.DAY_OF_MONTH) == dataComparada.get(Calendar.DAY_OF_MONTH) &&
+				this.data.get(Calendar.MONTH) == dataComparada.get(Calendar.MONTH));
+	}
+
 }

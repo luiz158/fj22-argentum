@@ -1,6 +1,7 @@
 package br.com.caelum.argentum;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -21,10 +22,39 @@ public class NegociacaoTest {
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void naoCriaNegociacaoComDataNula() {
+	public void naoCriaNegociacaoComDataNula()  throws Exception {
 		Negociacao negociacao = new Negociacao(100, 2, null);
 		
 		Assert.assertNotNull(negociacao.getData());
 	}
+
+	@Test
+	public void mesmoMilissegundoEhDoMesmoDia() throws Exception {
+		Calendar agora = Calendar.getInstance();
+		Calendar mesmoMomento = (Calendar) agora.clone();
+		
+		Negociacao negociacao = new Negociacao(100, 50, agora);
+		
+		Assert.assertTrue(negociacao.isMesmoDia(mesmoMomento));
+	}
 	
+	@Test
+	public void comHorariosDiferentesEhNoMesmoDia() throws Exception {
+		Calendar primeiraData = new GregorianCalendar(2014, 9, 30, 21, 30);
+		Calendar segundaData = new GregorianCalendar(2014, 9, 30, 22, 30);
+		
+		Negociacao negociacao = new Negociacao(100, 50, primeiraData);
+		
+		Assert.assertTrue(negociacao.isMesmoDia(segundaData));
+	}
+	
+	@Test
+	public void mesmoDiaMasMesesDiferentesNaoSaoDoMesmoDia() throws Exception {
+		Calendar primeiraData = new GregorianCalendar(2014, 9, 30);
+		Calendar segundaData = new GregorianCalendar(2014, 10, 30);
+		
+		Negociacao negociacao = new Negociacao(100, 50, primeiraData);
+		
+		Assert.assertFalse(negociacao.isMesmoDia(segundaData));
+	}
 }
